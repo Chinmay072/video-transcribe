@@ -1,3 +1,4 @@
 flask==2.0.1
 assemblyai==0.17.0
 gunicorn==20.1.0
+werkzeug==2.0.1
