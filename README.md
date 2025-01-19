@@ -90,23 +90,7 @@ Upload a video or audio file for transcription.
 - Content-Type: multipart/form-data
 - Body: file (audio/video file)
 
-**Response:**
-```json
-{
-    "success": true,
-    "sentences": [
-        {
-            "text": "This is the first sentence.",
-            "start_time": 0.0,
-            "end_time": 2.5
-        },
-        {
-            "text": "This is the second sentence.",
-            "start_time": 2.5,
-            "end_time": 5.0
-        }
-    ]
-}
+
 ```
 
 ### Example Usage
