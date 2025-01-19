@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: media-insights-analyzer
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn media_insights_analyzer:app
+    envVars:
+      - key: ASSEMBLYAI_API_KEY
+        sync: false
