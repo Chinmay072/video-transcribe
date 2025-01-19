@@ -24,27 +24,8 @@ def process_transcription(file_path):
     # Transcribe the audio file
     transcript = transcriber.transcribe(file_path)
     
-    # Process the transcript into sentences
-    sentences = []
-    current_sentence = ""
-    start_time = None
-    
-    for word in transcript.words:
-        if not current_sentence:
-            start_time = word.start / 1000.0
-        
-        current_sentence += word.text + " "
-        
-        if word.text.endswith((".", "!", "?")):
-            sentences.append({
-                "text": current_sentence.strip(),
-                "start_time": start_time,
-                "end_time": word.end / 1000.0
-            })
-            current_sentence = ""
-            start_time = None
-    
-    return sentences
+    # Get the complete text
+    return transcript.text
 
 @app.route('/health', methods=['GET'])
 def health_check():
@@ -68,14 +49,14 @@ def transcribe_audio():
         file.save(filepath)
         
         # Process the transcription
-        sentences = process_transcription(filepath)
+        transcribed_text = process_transcription(filepath)
         
         # Clean up the uploaded file
         os.remove(filepath)
         
         return jsonify({
             "success": True,
-            "sentences": sentences
+            "transcription": transcribed_text
         })
     
     except Exception as e:
