@@ -4,6 +4,12 @@ services:
     env: python
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn media_insights_analyzer:app
+    plan: free
+    branch: main
+    runtime: python3
+    region: singapore
+    healthCheckPath: /health
     envVars:
       - key: ASSEMBLYAI_API_KEY
         sync: false
+    autoDeploy: true
